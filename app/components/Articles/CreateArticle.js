@@ -75,32 +75,32 @@ class CreateArticle extends React.Component {
     return (
       <div className="container-fluid">
         <Messages messages={this.props.messages} />
-        <div className="row">
-          <div className="col-sm-9">
-            <input
-              className="form-control"
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Your title please..."
-              onChange={this.onChangeTitle}
-            />
+        <form onSubmit={this.handleSubmit}>
+          <div className="row">
+            <div className="col-sm-9">
+              <input
+                className="form-control"
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Your title please..."
+                onChange={this.onChangeTitle}
+              />
+            </div>
+            <div className="col-sm-3" style={{ paddingTop: '2px' }}>
+              <p>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                >
+                  Save
+                </button>
+                <button type="button" className="btn btn-default">Cancel</button>
+              </p>
+            </div>
           </div>
-          <div className="col-sm-3" style={{ paddingTop: '2px' }}>
-            <p>
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
-                Save
-              </button>
-              <button type="button" className="btn btn-default">Cancel</button>
-            </p>
-          </div>
-        </div>
-        <div className="row" style={{ marginTop: '5px' }}>
-          <div className="col-sm-12">
-            <form onSubmit={this.handleSubmit}>
+          <div className="row" style={{ marginTop: '5px' }}>
+            <div className="col-sm-12">
               <div className="RichEditor-root">
                 <BlockStyleControls
                   editorState={editorState}
@@ -124,9 +124,9 @@ class CreateArticle extends React.Component {
                   />
                 </div>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     );
   }
