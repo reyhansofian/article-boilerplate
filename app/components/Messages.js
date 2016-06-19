@@ -8,7 +8,7 @@ class Messages extends React.Component {
   renderMessage() {
     if (this.props.messages.success) {
       return (
-        <div role="alert" className="callout success">
+        <div role="alert" className="alert alert-success">
           {this.props.messages.success.map((message, index) =>
             <div key={index}>{message.msg}</div>)
           }
@@ -16,13 +16,13 @@ class Messages extends React.Component {
       );
     } else if (this.props.messages.error) {
       return (
-        <div role="alert" className="callout alert">
+        <div role="alert" className="alert alert-danger">
           {this.props.messages.error.map((message, index) => <div key={index}>{message.msg}</div>)}
         </div>
       );
     } else if (this.props.messages.info) {
       return (
-        <div role="alert" className="callout primary">
+        <div role="alert" className="alert alert-info">
           {this.props.messages.info.map((message, index) => <div key={index}>{message.msg}</div>)}
         </div>
       );

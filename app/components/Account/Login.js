@@ -42,60 +42,50 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="column row">
-        <div className="row">
-          <div className="medium-8 medium-offset-2 columns">
+      <div className="login-container container">
+        <div className="panel">
+          <div className="panel-body">
             <Messages messages={this.props.messages} />
-
             <form onSubmit={this.handleLogin}>
-              <h4>Log In</h4>
-
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                autoFocus
-              />
-
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-
-              <p><Link to="/forgot">Forgot your password?</Link></p>
-
-              <button type="submit" className="button">Log in</button>
+              <legend>Log In</legend>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  autoFocus
+                  className="form-control"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  className="form-control"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group"><Link to="/forgot"><strong>Forgot your password?</strong></Link></div>
+              <button type="submit" className="btn btn-success">Log in</button>
             </form>
-
             <div className="hr-title"><span>or</span></div>
-
-            <div className="button-group">
-              <button
-                onClick={this.handleFacebook}
-                className="button facebook"
-              >
-                Sign in with Facebook
-              </button>
-              <button
-                onClick={this.handleTwitter}
-                className="button twitter"
-              >
-                Sign in with Twitter
-              </button>
+            <div className="btn-toolbar text-center">
+              <button onClick={this.handleFacebook} className="btn btn-facebook">Sign in with Facebook</button>
+              <button onClick={this.handleTwitter} className="btn btn-twitter">Sign in with Twitter</button>
             </div>
-
-            <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
           </div>
         </div>
+        <p className="text-center">
+          Don't have an account? <Link to="/signup"><strong>Sign up</strong></Link>
+        </p>
       </div>
     );
   }

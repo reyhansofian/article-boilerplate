@@ -1,4 +1,4 @@
-var Post = require('../models/Post');
+var Article = require('../models/Article');
 
 exports.articlePost = function articlePost(req, res) {
   req.assert('title', 'Title cannot be blank').notEmpty();
@@ -9,7 +9,7 @@ exports.articlePost = function articlePost(req, res) {
     return res.status(400).send(errors);
   }
 
-  new Post({
+  new Article({
     title: req.body.title,
     posts: req.body.posts,
     raw_posts: req.body.raw_posts,

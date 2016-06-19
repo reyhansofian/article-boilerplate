@@ -9,7 +9,7 @@ import Signup from './components/Account/Signup';
 import Profile from './components/Account/Profile';
 import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
-import Create from './components/Articles/Create';
+import CreateArticle from './components/Articles/CreateArticle';
 
 export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
@@ -56,8 +56,8 @@ export default function getRoutes(store) {
         onLeave={clearMessages}
       />
       <Route
-        path="/article"
-        component={Create}
+        path="/article/create"
+        component={CreateArticle}
         onEnter={ensureAuthenticated}
         onLeave={clearMessages}
       />

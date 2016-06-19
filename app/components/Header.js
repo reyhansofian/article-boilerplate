@@ -15,50 +15,68 @@ class Header extends React.Component {
   }
 
   render() {
+    const active = { borderBottomColor: '#3f51b5' };
     const rightNav = this.props.token ? (
-      <div className="top-bar-right">
-        <ul className="menu">
-          <li><Link to="/account" activeClassName="active">My Account</Link></li>
-          <li><a href="#" onClick={this.handleLogout}>Logout</a></li>
-        </ul>
-      </div>
+      <ul className="nav navbar-nav navbar-right">
+        <li className="dropdown">
+          <a href="#" data-toggle="dropdown" className="navbar-avatar dropdown-toggle">
+            <img src={this.props.user.picture || this.props.user.gravatar} role="presentation" />
+            {' '}{this.props.user.name || this.props.user.email || this.props.user.id}{' '}
+            <i className="caret"></i>
+          </a>
+          <ul className="dropdown-menu">
+            <li><Link to="/account">My Account</Link></li>
+            <li className="divider"></li>
+            <li><a href="#" onClick={this.handleLogout}>Logout</a></li>
+          </ul>
+        </li>
+      </ul>
     ) : (
-      <div className="top-bar-right">
-        <ul className="menu">
-          <li><Link to="/login" activeClassName="active">Log in</Link></li>
-          <li><Link to="/signup" activeClassName="active">Sign up</Link></li>
-        </ul>
-      </div>
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/login" activeStyle={active}>Log in</Link></li>
+        <li><Link to="/signup" activeStyle={active}>Sign up</Link></li>
+      </ul>
     );
 
     return (
-      <div className="top-bar">
-        <div className="top-bar-title">
-          <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
-            <span className="menu-icon light" data-toggle></span>
-          </span>
-          <IndexLink to="/">Articles</IndexLink>
-        </div>
-        <div id="responsive-menu">
-          <div className="top-bar-left">
-            <ul className="menu">
-              <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-              {this.props.token &&
-                <li>
-                  <IndexLink
-                    to="/article"
-                    activeClassName="active"
-                  >
-                    Create Article
-                  </IndexLink>
-                </li>
-              }
-              {/* <li><Link to="/contact" activeClassName="active">Contact</Link></li> */}
-            </ul>
+      <nav className="navbar navbar-default navbar-static-top">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#navbar" className="navbar-toggle collapsed">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <IndexLink to="/" className="navbar-brand">Project name</IndexLink>
           </div>
-          {rightNav}
+          <div id="navbar" className="navbar-collapse collapse">
+            <ul className="nav navbar-nav">
+              <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
+              <li className="dropdown">
+                <a
+                  href="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Articles <span className="caret"></span>
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <IndexLink to="/article/create" activeStyle={active}>
+                      Create Article
+                    </IndexLink>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {rightNav}
+          </div>
         </div>
-      </div>
+      </nav>
     );
   }
 }

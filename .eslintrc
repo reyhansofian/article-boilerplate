@@ -6,6 +6,7 @@
     "mocha": true
   },
   "rules": {
+    "max-len": [1, 120],
     "consistent-return": 0,
     "no-underscore-dangle": 0,
     "no-else-return": 0,
