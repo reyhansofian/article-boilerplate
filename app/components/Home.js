@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Messages from './Messages';
 import { getAll } from '../actions/article';
@@ -71,21 +72,48 @@ class Home extends React.Component {
                     className="panel-body"
                     style={{
                       maxHeight: '250px',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
+                      overflow: 'hidden'
                     }}
                   >
-                    <h3>{this.props.articles[article].title}</h3>
+                    <h3>
+                      <Link to={`/article/${this.props.articles[article].slug}`} className="article-title">
+                        {this.props.articles[article].title}
+                      </Link>
+                    </h3>
                     <div dangerouslySetInnerHTML={{ __html: this.showReadMore(this.props.articles[article].posts) }} />
                   </div>
-                  <div className="panel-footer">
-                    <img
-                      src="/icons/heart/svg/favorite.svg"
-                      height="20"
-                      width="20"
-                      alt="heart"
-                      onClick={this.onLikeClick}
-                    />
+                  <div
+                    className="panel-footer row"
+                    style={{ marginLeft: '0px', marginRight: '0px' }}
+                  >
+                    <div className="col-sm-4" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
+                      <div
+                        className="col-sm-6"
+                        style={{
+                          paddingLeft: '0px',
+                          paddingRight: '0px',
+                          marginRight: '5px',
+                          width: '22px',
+                        }}
+                      >
+                        <img
+                          src="/icons/heart/svg/favorite.svg"
+                          height="20"
+                          width="20"
+                          alt="heart"
+                          onClick={this.onLikeClick}
+                        />
+                      </div>
+                      <div
+                        className="col-sm-6"
+                        style={{
+                          padding: '0px',
+                          width: '30px'
+                        }}
+                      >
+                        10
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -59,3 +59,11 @@ export function getAll() {
     });
   };
 }
+
+export function getBySlug() {
+  return (dispatch, getState) => {
+    if (!Object.keys(getState().articles).length) {
+      dispatch(getAll());
+    }
+  };
+}

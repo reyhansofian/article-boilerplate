@@ -5818,6 +5818,9 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.text-grey {
+  color: #90A4AE; }
+
 html {
   position: relative;
   min-height: 100%; }
@@ -5833,6 +5836,9 @@ footer {
   bottom: 0;
   background-color: #fff;
   border-top: 1px solid #e0e0e0; }
+
+a {
+  text-decoration: none; }
 
 .login-container {
   max-width: 555px; }
@@ -5966,5 +5972,8 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase; }
 
-.text-grey {
-  color: #90A4AE; }
+.panel .panel-body h3 a.article-title {
+  display: inline-block;
+  color: #263238;
+  overflow-wrap: break-word;
+  word-wrap: break-word; }

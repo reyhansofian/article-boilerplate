@@ -29,10 +29,10 @@ $navbar-default-link-active-color: #262626;
 $panel-heading-padding: 20px 30px;
 $panel-body-padding: 30px;
 
-$text-grey: #90A4AE;
-
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
 @import "vendor/bootstrap";
+@import "_color";
+@import "_text-color";
 
 // Scaffolding
 // -------------------------
@@ -54,6 +54,10 @@ footer {
   bottom: 0;
   background-color: #fff;
   border-top: 1px solid #e0e0e0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .login-container {
@@ -242,6 +246,9 @@ textarea {
   text-transform: uppercase;
 }
 
-.text-grey {
-  color: $text-grey
+.panel .panel-body h3 a.article-title {
+  display: inline-block;
+  color: #263238;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }

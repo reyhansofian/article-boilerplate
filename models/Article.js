@@ -12,6 +12,10 @@ var Article = bookshelf.Model.extend({
     return this.query({ where: { status } }).fetchAll({ withRelated: ['users'] });
   },
 
+  bySlug: function bySlug(slug) {
+    return this.query({ where: { slug } }).fetch({ withRelated: ['users'] });
+  },
+
   initialize: function initialize() {
     this.on('saving', this.castAttr, this);
   },

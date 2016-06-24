@@ -38,3 +38,17 @@ exports.articleGet = function articleGet(req, res) {
       });
     });
 };
+
+exports.articleDetail = function articleDetail(req, res) {
+  new Article()
+      .bySlug(req.params.slug)
+      .then(function detailFetched(article) {
+        res.send({ article });
+      })
+      .catch(function fetchErr(errFetch) {
+        console.log(errFetch);
+        res.status(400).send({
+          msg: 'Error while fetching data'
+        });
+      });
+};
