@@ -8,6 +8,10 @@ var Article = bookshelf.Model.extend({
     return this.belongsTo('User', 'user_id');
   },
 
+  byStatus: function byStatus(status) {
+    return this.query({ where: { status } }).fetchAll({ withRelated: ['users'] });
+  },
+
   initialize: function initialize() {
     this.on('saving', this.castAttr, this);
   },

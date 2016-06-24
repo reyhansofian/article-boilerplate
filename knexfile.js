@@ -11,5 +11,5 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
   },
-  debug: true
+  debug: process.env.NODE_ENV !== 'production' || false
 };

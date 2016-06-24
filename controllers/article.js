@@ -27,14 +27,14 @@ exports.articlePost = function articlePost(req, res) {
 
 exports.articleGet = function articleGet(req, res) {
   new Article()
-    .fetchAll({ withRelated: ['users'] })
+    .byStatus('draft')
     .then(function allFetched(articles) {
       res.send({ articles });
     })
     .catch(function fetchErr(errFetch) {
       console.log(errFetch);
       res.status(400).send({
-        msg: 'Error while fetching'
+        msg: 'Error while fetching data'
       });
     });
 };
