@@ -43,9 +43,16 @@ class Home extends React.Component {
                       <p style={{ marginBottom: '0px' }}>
                         <b>
                           {this.props.articles[article].users.name}
-                        </b> - {moment(this.props.articles[article].created_at, 'YYYY-MM-DD').fromNow()}
+                        </b>
+                        <span
+                          className="text-grey"
+                          dangerouslySetInnerHTML={{ __html: '&nbsp;&middot;&nbsp;' }}
+                        />
+                        <span className="text-grey">
+                          {moment(this.props.articles[article].created_at, 'YYYY-MM-DD').fromNow()}
+                        </span>
                       </p>
-                      <p style={{ marginBottom: '0px' }}>{this.props.articles[article].users.email}</p>
+                      <p className="text-grey">{this.props.articles[article].users.email}</p>
                     </div>
                   </div>
                   <div

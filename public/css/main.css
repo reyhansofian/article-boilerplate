@@ -5965,3 +5965,6 @@ textarea {
   border-radius: 2px;
   letter-spacing: 0.2em;
   text-transform: uppercase; }
+
+.text-grey {
+  color: #90A4AE; }
