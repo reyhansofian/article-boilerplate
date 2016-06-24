@@ -57,7 +57,7 @@ class Home extends React.Component {
                     }}
                   >
                     <h3>{this.props.articles[article].title}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: this.props.articles[article].posts }} />
+                    <div dangerouslySetInnerHTML={{ __html: this.showReadMore(this.props.articles[article].posts) }} />
                   </div>
                   <div className="panel-footer">
                     <a href="#" role="button" className="btn btn-default">View details</a>
@@ -69,6 +69,19 @@ class Home extends React.Component {
         </div>
       </div>
     );
+  }
+
+  showReadMore(string, limit = 250) {
+    const shouldTrim = string.replace(/<[^>]*>/g, '').length > limit;
+
+    if (shouldTrim) {
+      let trimmedString = string.replace(/<[^>]*>/g, '').substr(0, limit);
+      trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')));
+
+      return `${trimmedString} ... <a href="#">Read More</>`;
+    }
+
+    return string;
   }
 }
 
