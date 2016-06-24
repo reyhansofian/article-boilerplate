@@ -9,8 +9,20 @@ class Home extends React.Component {
     return store.dispatch(getAll());
   }
 
+  constructor(props) {
+    super(props);
+    this.onLikeClick = this.onLikeClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.dispatch(getAll());
+  }
+
+  onLikeClick(e) {
+    const currentIcon = e.target.src.split('/').pop();
+    e.target.src = (currentIcon === 'like.svg')
+                  ? '/icons/heart/svg/favorite.svg'
+                  : '/icons/heart/svg/like.svg';
   }
 
   render() {
@@ -67,7 +79,13 @@ class Home extends React.Component {
                     <div dangerouslySetInnerHTML={{ __html: this.showReadMore(this.props.articles[article].posts) }} />
                   </div>
                   <div className="panel-footer">
-                    <a href="#" role="button" className="btn btn-default">View details</a>
+                    <img
+                      src="/icons/heart/svg/favorite.svg"
+                      height="20"
+                      width="20"
+                      alt="heart"
+                      onClick={this.onLikeClick}
+                    />
                   </div>
                 </div>
               </div>
