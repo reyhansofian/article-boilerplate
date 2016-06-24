@@ -4,15 +4,14 @@ exports.up = function up(knex, Promise) { //eslint-disable-line
     table.increments('id').primary();
     table.string('name');
     table.timestamps();
-  }).createTable('posts', function(table) { //eslint-disable-line
+  }).createTable('articles', function(table) { //eslint-disable-line
     table.increments('id').primary();
     table.string('title').notNullable();
     table.string('slug').notNullable();
     table.integer('user_id')
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('users');
+          .references('users.id');
     table.text('posts');
     table.integer('tag_id')
           .unsigned()
@@ -25,7 +24,7 @@ exports.up = function up(knex, Promise) { //eslint-disable-line
 
 exports.down = function down(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTableIfExists('posts'),
+    knex.schema.dropTableIfExists('articles'),
     knex.schema.dropTableIfExists('tags')
   ]);
 };

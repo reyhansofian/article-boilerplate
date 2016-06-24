@@ -11,6 +11,7 @@ export default function messages(state = {}, action) {
     case 'UNLINK_FAILURE':
     case 'LINK_FAILURE':
     case 'CREATE_ARTICLE_FAILURE':
+    case 'FETCH_ARTICLE_FAILURE':
       return {
         error: action.messages
       };

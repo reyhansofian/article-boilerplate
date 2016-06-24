@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -18,10 +19,6 @@ var config = require('./webpack.config');
 
 // Load environment variables from .env file
 dotenv.load();
-
-// ES6 Transpiler
-require('babel-core/register');
-require('babel-polyfill');
 
 // Models
 var User = require('./models/User');
@@ -100,6 +97,7 @@ if (app.get('env') === 'development') {
 
 // Article
 app.post('/article', articleController.articlePost);
+app.get('/article', articleController.articleGet);
 
 app.post('/contact', contactController.contactPost);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
@@ -132,13 +130,26 @@ app.use(function reactServerRendering(req, res) {
     } else if (redirectLocation) {
       res.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      var html = ReactDOM.renderToString(React.createElement(Provider, { store },
-        React.createElement(Router.RouterContext, renderProps)
-      ));
-      res.render('layouts/main', {
-        html,
-        initialState: store.getState()
-      });
+      const fetchedData = renderProps.components
+            .filter((component) => component.fetchData)
+            .map((component) => component.fetchData(store, renderProps.params));
+
+      Promise.all(fetchedData)
+              .then(() => {
+                var html = ReactDOM.renderToString(
+                  <Provider store={store}>
+                    <Router.RouterContext {...renderProps} />
+                  </Provider>
+                );
+                res.render('layouts/main', {
+                  html,
+                  initialState: store.getState()
+                });
+              })
+              .catch((errFetch) => {
+                console.log(errFetch);
+                res.sendStatus(500);
+              });
     } else {
       res.sendStatus(404);
     }

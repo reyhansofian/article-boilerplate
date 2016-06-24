@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router';
+import Connection from '../../config/connection';
 
 export function saveArticle(title, postRaw, postRawHTML) {
   return (dispatch, getState) => {
@@ -6,7 +7,7 @@ export function saveArticle(title, postRaw, postRawHTML) {
       type: 'CLEAR_MESSAGES'
     });
 
-    return fetch('/article', {
+    return Connection.post('/article', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -29,6 +30,28 @@ export function saveArticle(title, postRaw, postRawHTML) {
         return response.json().then((json) => {
           dispatch({
             type: 'CREATE_ARTICLE_FAILURE',
+            messages: Array.isArray(json) ? json : [json]
+          });
+        });
+      }
+    });
+  };
+}
+
+export function getAll() {
+  return (dispatch) => {
+    return Connection.get('/article').then((response) => {
+      if (response.ok) {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'FETCH_ARTICLE_SUCCESS',
+            articles: json.articles
+          });
+        });
+      } else {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'FETCH_ARTICLE_FAILURE',
             messages: Array.isArray(json) ? json : [json]
           });
         });

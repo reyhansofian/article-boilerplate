@@ -1,13 +1,13 @@
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var bookshelf = require('../config/bookshelf');
-var Article = require('./Article');
+require('./Article');
 
 var User = bookshelf.Model.extend({
   tableName: 'users',
   hasTimestamps: true,
-  posts: function posts() {
-    return this.hasMany(Article);
+  articles: function articles() {
+    return this.hasMany('Article');
   },
 
   initialize: function initialize() {
@@ -50,4 +50,4 @@ var User = bookshelf.Model.extend({
   }
 });
 
-module.exports = User;
+module.exports = bookshelf.model('User', User);

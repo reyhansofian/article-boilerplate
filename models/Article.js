@@ -1,11 +1,11 @@
 var bookshelf = require('../config/bookshelf');
-var User = require('./User');
+require('./User');
 
 var Article = bookshelf.Model.extend({
-  tableName: 'posts',
+  tableName: 'articles',
   hasTimestamps: true,
   users: function users() {
-    return this.belongsTo(User);
+    return this.belongsTo('User', 'user_id');
   },
 
   initialize: function initialize() {
@@ -36,4 +36,4 @@ var Article = bookshelf.Model.extend({
   }
 });
 
-module.exports = Article;
+module.exports = bookshelf.model('Article', Article);

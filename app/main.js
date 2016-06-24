@@ -1,11 +1,11 @@
-import 'whatwg-fetch';
+import 'babel-polyfill';
+import 'object-assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import configureStore from './store/configureStore';
 import getRoutes from './routes';
-require('object-assign');
 
 const store = configureStore(window.INITIAL_STATE);
 
