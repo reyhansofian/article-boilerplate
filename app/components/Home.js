@@ -80,7 +80,12 @@ class Home extends React.Component {
                         {this.props.articles[article].title}
                       </Link>
                     </h3>
-                    <div dangerouslySetInnerHTML={{ __html: this.showReadMore(this.props.articles[article].posts) }} />
+                    <div>
+                      {this.showReadMore(
+                        this.props.articles[article].posts,
+                        this.props.articles[article].slug
+                      )}
+                    </div>
                   </div>
                   <div
                     className="panel-footer row"
@@ -124,17 +129,27 @@ class Home extends React.Component {
     );
   }
 
-  showReadMore(string, limit = 250) {
-    const shouldTrim = string.replace(/<[^>]*>/g, '').length > limit;
+  showReadMore(string, slug, limit = 250) {
+    const removedHTMLTag = string.replace(/<[^>]*>/g, '');
+    const shouldTrim = removedHTMLTag.length > limit;
 
     if (shouldTrim) {
-      let trimmedString = string.replace(/<[^>]*>/g, '').substr(0, limit);
+      let trimmedString = removedHTMLTag.substr(0, limit);
       trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')));
 
-      return `${trimmedString} ... <a href="#">Read More</>`;
+      return (
+        <div>
+          {`${trimmedString} ... `}
+          <Link to={`/article/${slug}`}>Read More</Link>
+        </div>
+      );
     }
 
-    return string;
+    return (
+      <div>
+        {removedHTMLTag}
+      </div>
+    );
   }
 }
 
